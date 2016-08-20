@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CorrelationCreateDlg" widgetVar="CorrelationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCorrelationTitle}">
+            <h:form id="CorrelationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{correlationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCorrelationLabel_user1}" for="user1" />
+                        <p:selectOneMenu id="user1" value="#{correlationController.selected.user1}" >
+                            <f:selectItems value="#{recommenderUserController.itemsAvailableSelectOne}"
+                                           var="user1Item"
+                                           itemValue="#{user1Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCorrelationLabel_user2}" for="user2" />
+                        <p:selectOneMenu id="user2" value="#{correlationController.selected.user2}" >
+                            <f:selectItems value="#{recommenderUserController.itemsAvailableSelectOne}"
+                                           var="user2Item"
+                                           itemValue="#{user2Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCorrelationLabel_correlation_value}" for="correlation_value" />
+                        <p:inputText id="correlation_value" value="#{correlationController.selected.correlation_value}" title="#{bundle.CreateCorrelationTitle_correlation_value}" />
+                        <p:outputLabel value="#{bundle.CreateCorrelationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{correlationController.selected.id}" title="#{bundle.CreateCorrelationTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{correlationController.create}" value="#{bundle.Save}" update="display,:CorrelationListForm:datalist,:growl" oncomplete="handleSubmit(args,'CorrelationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CorrelationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

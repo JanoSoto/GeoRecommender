@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VenueEditDlg" widgetVar="VenueEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVenueTitle}">
+            <h:form id="VenueEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{venueController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVenueLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{venueController.selected.id}" title="#{bundle.EditVenueTitle_id}" required="true" requiredMessage="#{bundle.EditVenueRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditVenueLabel_latitude}" for="latitude" />
+                        <p:inputText id="latitude" value="#{venueController.selected.latitude}" title="#{bundle.EditVenueTitle_latitude}" required="true" requiredMessage="#{bundle.EditVenueRequiredMessage_latitude}"/>
+                        <p:outputLabel value="#{bundle.EditVenueLabel_longitude}" for="longitude" />
+                        <p:inputText id="longitude" value="#{venueController.selected.longitude}" title="#{bundle.EditVenueTitle_longitude}" required="true" requiredMessage="#{bundle.EditVenueRequiredMessage_longitude}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{venueController.update}" value="#{bundle.Save}" update="display,:VenueListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VenueEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VenueEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
