@@ -31,4 +31,8 @@ public interface RatingFacadeLocal {
     int count();
     
     List<Rating> findByUser(Long user_id);
+    
+    double getAverageRatingByUser(Long user_id);
+    
+    double getRatingByUserAndVenue(Long user_id, Long venue_id);
 }

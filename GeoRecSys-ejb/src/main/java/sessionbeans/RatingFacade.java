@@ -43,5 +43,29 @@ public class RatingFacade extends AbstractFacade<Rating> implements RatingFacade
             return new ArrayList<>();
         }
     }
+
+    @Override
+    public double getAverageRatingByUser(Long user_id) {
+        Query query = em.createNamedQuery("Rating.getAverageRatingByUser").setParameter("user_id", user_id);
+        try{
+            return (double) query.getSingleResult();
+        }
+        catch(NoResultException e){
+            return -1;
+        }
+    }
+
+    @Override
+    public double getRatingByUserAndVenue(Long user_id, Long venue_id) {
+        Query query = em.createNamedQuery("Rating.getRatingByUserAndVenue");
+        query.setParameter("user_id", user_id);
+        query.setParameter("venue_id", venue_id);
+        try{
+            return (double) query.getSingleResult();
+        }
+        catch(NoResultException e){
+            return -1;
+        }
+    }
     
 }

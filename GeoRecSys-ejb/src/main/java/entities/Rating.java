@@ -21,7 +21,9 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Rating.findByUser", query="SELECT r FROM Rating r WHERE r.user.id = :user_id")
+    @NamedQuery(name="Rating.findByUser", query="SELECT r FROM Rating r WHERE r.user.id = :user_id"),
+    @NamedQuery(name="Rating.getAverageRatingByUser", query="SELECT AVG(r.rating_venue) FROM Rating r WHERE r.user.id = :user_id"),
+    @NamedQuery(name="Rating.getRatingByUserAndVenue", query="SELECT r.rating_venue FROM Rating r WHERE r.user.id = :user_id AND r.venue.id = :venue_id")
 })
 public class Rating implements Serializable {
     

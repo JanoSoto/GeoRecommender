@@ -11,12 +11,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author JAno
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Correlation.getTopFiveCorrelations", query="SELECT c FROM Correlation c WHERE c.user1.id = :user_id OR c.user2.id = :user_id ORDER BY c.correlation_value DESC LIMIT 5"),
+    @NamedQuery(name="Correlation.getCorrelationByUsers", query="SELECT c.correlation_value FROM Correlation c WHERE c.user1.id = :user1_id AND c.user2.id = :user2_id")
+})
 public class Correlation implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -30,4 +30,7 @@ public interface CorrelationFacadeLocal {
 
     int count();
     
+    List<Correlation> getTopFiveCorrelations(Long user_id);
+    
+    double getCorrelationByUsers(Long user1_id, Long user2_id);
 }
