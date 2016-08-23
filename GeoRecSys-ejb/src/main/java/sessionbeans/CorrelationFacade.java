@@ -36,6 +36,7 @@ public class CorrelationFacade extends AbstractFacade<Correlation> implements Co
     @Override
     public List<Correlation> getTopFiveCorrelations(Long user_id) {
         Query query = em.createNamedQuery("Correlation.getTopFiveCorrelations").setParameter("user_id", user_id);
+        query.setMaxResults(5);
         try{
             return (List<Correlation>) query.getResultList();
         }

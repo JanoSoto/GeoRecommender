@@ -34,5 +34,5 @@ public interface RatingFacadeLocal {
     
     double getAverageRatingByUser(Long user_id);
     
-    double getRatingByUserAndVenue(Long user_id, Long venue_id);
+    int getRatingByUserAndVenue(Long user_id, Long venue_id);
 }

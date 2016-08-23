@@ -48,7 +48,13 @@ public class RatingFacade extends AbstractFacade<Rating> implements RatingFacade
     public double getAverageRatingByUser(Long user_id) {
         Query query = em.createNamedQuery("Rating.getAverageRatingByUser").setParameter("user_id", user_id);
         try{
-            return (double) query.getSingleResult();
+            String resultado = (String) query.getSingleResult();
+            if(resultado != null){
+                return Double.parseDouble((String) query.getSingleResult());
+            }
+            else{
+                return 0;
+            }
         }
         catch(NoResultException e){
             return -1;
@@ -56,12 +62,12 @@ public class RatingFacade extends AbstractFacade<Rating> implements RatingFacade
     }
 
     @Override
-    public double getRatingByUserAndVenue(Long user_id, Long venue_id) {
+    public int getRatingByUserAndVenue(Long user_id, Long venue_id) {
         Query query = em.createNamedQuery("Rating.getRatingByUserAndVenue");
         query.setParameter("user_id", user_id);
         query.setParameter("venue_id", venue_id);
         try{
-            return (double) query.getSingleResult();
+            return (int) query.getSingleResult();
         }
         catch(NoResultException e){
             return -1;
